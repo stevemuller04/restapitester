@@ -2,20 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RestApiTester;assembly="
-        Title="Show Response" Height="400" Width="600" WindowStartupLocation="CenterOwner">
-    <Grid Margin="10">
+        Title="Show Response" Height="500" Width="600" WindowStartupLocation="CenterOwner" Style="{StaticResource window}">
+    <Grid Style="{StaticResource windowGrid}">
         <Grid.Resources>
-            <Style TargetType="Button">
-                <Setter Property="Padding" Value="10,3" />
-                <Setter Property="HorizontalAlignment" Value="Left" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
             <Style TargetType="TextBox">
                 <Setter Property="VerticalContentAlignment" Value="Center" />
-                <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="IsReadOnly" Value="True" />
             </Style>
         </Grid.Resources>
@@ -30,21 +21,21 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Label>Status</Label>
-        <Label Grid.Row="1">Request</Label>
-        <Label Grid.Row="2">Content-Type</Label>
-        <Label Grid.Row="3">Headers</Label>
-        <Label Grid.Row="4">Content</Label>
+        <Label Style="{StaticResource paramHeader}">Status</Label>
+        <Label Style="{StaticResource paramHeader}" Grid.Row="1">Request</Label>
+        <Label Style="{StaticResource paramHeader}" Grid.Row="2">Content-Type</Label>
+        <Label Style="{StaticResource paramHeader}" Grid.Row="3">Headers</Label>
+        <Label Style="{StaticResource paramHeader}" Grid.Row="4">Content</Label>
         <StackPanel Grid.Column="1" Orientation="Horizontal">
             <Image Width="20" Height="20" Source="{Binding StatusIcon, Mode=OneWay}" Margin="0,0,10,0" />
             <Label Content="{Binding StatusCode, Mode=OneWay}" />
             <Label Content="{Binding StatusString, Mode=OneWay}" />
         </StackPanel>
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-            <local:HttpMethodLabel DataContext="{Binding Request.Method}" />
-            <TextBox Text="{Binding Request.Url, Mode=OneWay}" Margin="10,0,50,0" />
-            <Button Command="{Binding ShowRequestCommand}">Details</Button>
-        </StackPanel>
+        <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="False">
+            <local:HttpMethodLabel DockPanel.Dock="Left" DataContext="{Binding Request.Method}" />
+            <TextBox Text="{Binding Request.Url, Mode=OneWay}" Margin="10,0,0,0" Padding="10,0" />
+            <Button DockPanel.Dock="Right" Command="{Binding ShowRequestCommand}" Margin="0">Details</Button>
+        </DockPanel>
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ContentType, Mode=OneWay}" />
         <DataGrid Grid.Column="1" Grid.Row="3" MinHeight="150" ItemsSource="{Binding Headers}" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>

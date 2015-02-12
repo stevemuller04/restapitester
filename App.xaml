@@ -3,6 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="Black" Opacity="0.4" x:Key="boxShadow" />
+        <DropShadowEffect BlurRadius="3" ShadowDepth="2" Color="Black" Opacity="0.1" x:Key="lightBoxShadow" />
+        <Style TargetType="Window" x:Key="window">
+            <Setter Property="FontFamily" Value="Calibri" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            <Setter Property="Background" Value="#EEEEEE" />
+        </Style>
+        <Style TargetType="Grid" x:Key="windowGrid">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#444444" />
+            <Setter Property="Background" Value="#888888" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" Effect="{StaticResource lightBoxShadow}" Background="#F4F4F4" BorderBrush="#D0D0D0" BorderThickness="1" CornerRadius="2">
+                            <ContentPresenter x:Name="buttonPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,5" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#FAFAFA" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="buttonBorder" Property="Effect" Value="{x:Null}" />
+                                <Setter TargetName="buttonPresenter" Property="Margin" Value="16,6,14,4" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="ItemsControl" x:Key="responseItemsList">
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Effect" Value="{StaticResource boxShadow}" />
+        </Style>
+        <Style TargetType="Border" x:Key="responseItem">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderThickness" Value="0,2,0,0" />
+            <Setter Property="BorderBrush" Value="WhiteSmoke" />
+        </Style>
+        <Style TargetType="Border" x:Key="firstResponseItem" BasedOn="{StaticResource responseItem}">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style TargetType="Label" x:Key="paramHeader">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,0,20,0" />
+        </Style>
     </Application.Resources>
 </Application>

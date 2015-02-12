@@ -11,3 +11,7 @@ This simple tool allows you to quickly specify a HTTP request and inspect the re
 ## Screenshots
 
 <img src="Screenshots/main.png" />
+
+<img src="Screenshots/response.png" />
+
+<img src="Screenshots/request.png" />

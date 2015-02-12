@@ -33,7 +33,7 @@
         </StackPanel>
         <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="False">
             <local:HttpMethodLabel DockPanel.Dock="Left" DataContext="{Binding Request.Method}" />
-            <TextBox Text="{Binding Request.Url, Mode=OneWay}" Margin="10,0,0,0" Padding="10,0" />
+            <TextBlock Text="{Binding Request.Url, Mode=OneWay}" Margin="10,0,0,0" Padding="10,0" VerticalAlignment="Center" />
             <Button DockPanel.Dock="Right" Command="{Binding ShowRequestCommand}" Margin="0">Details</Button>
         </DockPanel>
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ContentType, Mode=OneWay}" />

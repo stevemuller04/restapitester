@@ -33,8 +33,7 @@ namespace RestApiTester
         private Request _request;
         private RequestViewModel _requestViewModel;
         private bool _isCompleted = false;
-        private int _statusCode = 0;
-        private string _statusString = string.Empty, _statusIcon = string.Empty;
+        private string _statusCode = "...", _statusString = string.Empty, _statusIcon = string.Empty;
         private string _contentType = string.Empty, _content = string.Empty, _summary = string.Empty;
         private List<HttpHeader> _headers = new List<HttpHeader>();
 
@@ -97,7 +96,7 @@ namespace RestApiTester
         /// This correlates with the HTTP status code, unless a connection error occurred
         /// (in which case the value is undefined).
         /// </summary>
-        public int StatusCode
+        public string StatusCode
         {
             get { return _statusCode; }
             protected set
@@ -181,13 +180,13 @@ namespace RestApiTester
         /// </summary>
         public async Task FetchAsync()
         {
-            this.StatusCode = 0;
+            this.StatusCode = "...";
             this.StatusString = "Connecting to server ...";
             this.StatusIcon = "working";
 
             var httpRequest = await _request.CreateHttpWebRequestAsync();
             HttpWebResponse httpResponse;
-
+            await Task.Delay(1500);
             try
             {
                 httpResponse = (HttpWebResponse)await httpRequest.GetResponseAsync();
@@ -203,7 +202,7 @@ namespace RestApiTester
                 else
                 {
                     httpResponse = null;
-                    this.StatusCode = -1;
+                    this.StatusCode = "Err";
                     this.StatusString = ex.Message;
                 }
             }
@@ -219,7 +218,7 @@ namespace RestApiTester
         /// </summary>
         private async Task UpdateFromResponseAsync(HttpWebResponse httpResponse)
         {
-            this.StatusCode = (int)httpResponse.StatusCode;
+            this.StatusCode = ((int)httpResponse.StatusCode).ToString();
             this.StatusString = httpResponse.StatusDescription;
             this.ContentType = httpResponse.ContentType;
             this.Summary = httpResponse.ContentType + ", fetching response body...";

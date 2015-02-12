@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
-using System.Windows.Input;
 
 namespace RestApiTester
 {
@@ -62,7 +61,9 @@ namespace RestApiTester
                 switch (columnName)
                 {
                     case "Name":
-                        if (Array.Exists(ProtectedHttpHeaders, x => x.Equals(this.Name, StringComparison.InvariantCultureIgnoreCase)))
+                        if (string.IsNullOrWhiteSpace(this.Name))
+                            error = "Empty HTTP headers are not allowed.";
+                        else if (Array.Exists(ProtectedHttpHeaders, x => x.Equals(this.Name, StringComparison.InvariantCultureIgnoreCase)))
                             error = "The HTTP header '" + this.Name + "' is protected and cannot be set explicitly.";
                         break;
                 }

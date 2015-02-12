@@ -14,6 +14,7 @@ namespace RestApiTester
             new HttpMethodViewModel("DELETE", Color.FromRgb(0xEC, 0x1F, 0x1D)),
             new HttpMethodViewModel("OPTIONS", Color.FromRgb(0x66, 0x66, 0x66)),
             new HttpMethodViewModel("HEAD", Color.FromRgb(0x66, 0x66, 0x66)),
+            new HttpMethodViewModel("TRACE", Color.FromRgb(0x66, 0x66, 0x66)),
         };
     }
 }

@@ -185,7 +185,7 @@ namespace RestApiTester
             this.StatusString = "Connecting to server ...";
             this.StatusIcon = "working";
 
-            var httpRequest = _request.CreateHttpWebRequest();
+            var httpRequest = await _request.CreateHttpWebRequestAsync();
             HttpWebResponse httpResponse;
 
             try

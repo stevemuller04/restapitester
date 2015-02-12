@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\HttpParameter.cs" />
     <Compile Include="Views\HttpMethodLabel.xaml.cs">
       <DependentUpon>HttpMethodLabel.xaml</DependentUpon>
     </Compile>

@@ -45,6 +45,7 @@ namespace RestApiTester
         private HttpMethodViewModel _method;
         private string _url, _accept, _authUsername, _authPassword;
         private ObservableCollection<HttpHeader> _headers;
+        private ObservableCollection<HttpParameter> _params;
 
         /// <summary>
         /// Raised when the view model wants the associated window to be closed.
@@ -136,6 +137,19 @@ namespace RestApiTester
         }
 
         /// <summary>
+        /// Gets or sets an (observable) list of all parameters passed to the requested resource.
+        /// </summary>
+        public ObservableCollection<HttpParameter> Parameters
+        {
+            get { return _params; }
+            set
+            {
+                _params = value;
+                OnPropertyChanged("Parameters");
+            }
+        }
+
+        /// <summary>
         /// Gets the command responsible for sending the request.
         /// </summary>
         public ICommand SendCommand { get; private set; }
@@ -216,6 +230,7 @@ namespace RestApiTester
                 AuthPassword = this.AuthPassword,
                 AuthUsername = this.AuthUsername,
                 Headers = this.Headers.ToList(),
+                Parameters = this.Parameters.ToList(),
                 Method = this.Method.Name,
                 Url = new Uri(this.Url, UriKind.Absolute)
             };
@@ -234,6 +249,7 @@ namespace RestApiTester
             this.AuthUsername = request.AuthUsername;
             this.AuthPassword = request.AuthPassword;
             this.Headers = new ObservableCollection<HttpHeader>(request.Headers);
+            this.Parameters = new ObservableCollection<HttpParameter>(request.Parameters);
         }
 
         /// <summary>

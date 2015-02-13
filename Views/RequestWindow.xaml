@@ -36,12 +36,44 @@
         <Label Style="{StaticResource paramHeader}" Grid.Row="4">Authentication: Password</Label>
         <Label Style="{StaticResource paramHeader}" Grid.Row="5">Parameters</Label>
         <Label Style="{StaticResource paramHeader}" Grid.Row="6">Additional headers</Label>
-        <ComboBox Grid.Column="1" SelectedItem="{Binding Method, ValidatesOnDataErrors=True}" ItemsSource="{x:Static local:HttpMethods.Default}" IsEnabled="{Binding IsNew}">
+        <ComboBox Name="fldMethod" Grid.Column="1" SelectedItem="{Binding Method, ValidatesOnDataErrors=True}" ItemsSource="{x:Static local:HttpMethods.Default}" IsEnabled="{Binding IsNew}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <Label Padding="0" Foreground="{Binding Color}" Content="{Binding Name}" FontWeight="Bold" />
+                    <TextBlock Padding="0" Foreground="{Binding Color}" Text="{Binding Name}" FontWeight="Bold" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ComboBoxItem">
+                                <Border x:Name="Bd" Padding="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <Grid Width="{Binding ActualWidth, ElementName=fldMethod}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <local:HttpMethodLabel HorizontalAlignment="Left" />
+                                        <TextBlock Grid.Column="1" FontSize="14" Text="{Binding Description}" HorizontalAlignment="Stretch" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsHighlighted" Value="True">
+                                        <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
         </ComboBox>
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Url, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Accept, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />

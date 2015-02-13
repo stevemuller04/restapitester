@@ -186,7 +186,7 @@ namespace RestApiTester
 
             var httpRequest = await _request.CreateHttpWebRequestAsync();
             HttpWebResponse httpResponse;
-            await Task.Delay(1500);
+
             try
             {
                 httpResponse = (HttpWebResponse)await httpRequest.GetResponseAsync();

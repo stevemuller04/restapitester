@@ -4,6 +4,7 @@ This simple tool allows you to quickly specify a HTTP request and inspect the re
 
 ## Features
 
+* User-friendly GUI with a lot of explanations
 * Uses asynchronous programming (`async`/`await`)
 * Respects MVVM pattern
 * Well-documented code
@@ -15,3 +16,5 @@ This simple tool allows you to quickly specify a HTTP request and inspect the re
 <img src="Screenshots/response.png" />
 
 <img src="Screenshots/request.png" />
+
+<img src="Screenshots/request-method.png" />

@@ -11,13 +11,19 @@
             <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
             <Setter Property="Background" Value="#EEEEEE" />
         </Style>
+        <Style TargetType="Window" x:Key="styleDialogWindow" BasedOn="{StaticResource styleWindow}">
+            <Setter Property="Background" Value="White" />
+        </Style>
         <Style TargetType="Grid" x:Key="styleWindowGrid">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Margin" Value="10" />
         </Style>
+        <Style TargetType="StackPanel" x:Key="styleWindowStackPanel">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
         <Style TargetType="DataGrid">
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="BorderBrush" Value="#444444" />
+            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Background" Value="#888888" />
         </Style>
         <Style TargetType="Button">
@@ -56,9 +62,10 @@
         <Style TargetType="Border" x:Key="styleFirstResponseItem" BasedOn="{StaticResource styleResponseItem}">
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-        <Style TargetType="Label" x:Key="styleParamHeader">
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="0,0,20,0" />
+        <Style TargetType="TextBlock" x:Key="styleParamHeader">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0,10" />
+            <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <Style TargetType="DataGridColumnHeader">
             <Style.Triggers>

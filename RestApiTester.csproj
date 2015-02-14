@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\HttpMethodComboBox.xaml.cs">
+      <DependentUpon>HttpMethodComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\HttpParameter.cs" />
     <Compile Include="Views\HttpMethodLabel.xaml.cs">
       <DependentUpon>HttpMethodLabel.xaml</DependentUpon>
@@ -73,6 +76,10 @@
     <Compile Include="ViewModels\ResponseViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\RequestViewModel.cs" />
+    <Page Include="Views\HttpMethodComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HttpMethodLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

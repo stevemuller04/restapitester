@@ -21,11 +21,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource styleParamHeader}">Status</Label>
-        <Label Style="{StaticResource styleParamHeader}" Grid.Row="1">Request</Label>
-        <Label Style="{StaticResource styleParamHeader}" Grid.Row="2">Content-Type</Label>
-        <Label Style="{StaticResource styleParamHeader}" Grid.Row="3">Headers</Label>
-        <Label Style="{StaticResource styleParamHeader}" Grid.Row="4">Content</Label>
+        <TextBlock Style="{StaticResource styleParamHeader}">Status</TextBlock>
+        <TextBlock Style="{StaticResource styleParamHeader}" Grid.Row="1">Request</TextBlock>
+        <TextBlock Style="{StaticResource styleParamHeader}" Grid.Row="2">Content-Type</TextBlock>
+        <TextBlock Style="{StaticResource styleParamHeader}" Grid.Row="3">Headers</TextBlock>
+        <TextBlock Style="{StaticResource styleParamHeader}" Grid.Row="4">Content</TextBlock>
         <StackPanel Grid.Column="1" Orientation="Horizontal">
             <Image Width="20" Height="20" Source="{Binding StatusIcon, Mode=OneWay}" Margin="0,0,10,0" />
             <Label Content="{Binding StatusCode, Mode=OneWay}" />

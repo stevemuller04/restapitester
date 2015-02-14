@@ -5,13 +5,13 @@
     <Application.Resources>
         <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="Black" Opacity="0.4" x:Key="boxShadow" />
         <DropShadowEffect BlurRadius="3" ShadowDepth="2" Color="Black" Opacity="0.1" x:Key="lightBoxShadow" />
-        <Style TargetType="Window" x:Key="window">
+        <Style TargetType="Window" x:Key="styleWindow">
             <Setter Property="FontFamily" Value="Calibri" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
             <Setter Property="Background" Value="#EEEEEE" />
         </Style>
-        <Style TargetType="Grid" x:Key="windowGrid">
+        <Style TargetType="Grid" x:Key="styleWindowGrid">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Margin" Value="10" />
         </Style>
@@ -44,19 +44,19 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <Style TargetType="ItemsControl" x:Key="responseItemsList">
+        <Style TargetType="ItemsControl" x:Key="styleResponseItemsList">
             <Setter Property="Padding" Value="10" />
             <Setter Property="Effect" Value="{StaticResource boxShadow}" />
         </Style>
-        <Style TargetType="Border" x:Key="responseItem">
+        <Style TargetType="Border" x:Key="styleResponseItem">
             <Setter Property="Background" Value="White" />
             <Setter Property="BorderThickness" Value="0,2,0,0" />
             <Setter Property="BorderBrush" Value="WhiteSmoke" />
         </Style>
-        <Style TargetType="Border" x:Key="firstResponseItem" BasedOn="{StaticResource responseItem}">
+        <Style TargetType="Border" x:Key="styleFirstResponseItem" BasedOn="{StaticResource styleResponseItem}">
             <Setter Property="BorderThickness" Value="0" />
         </Style>
-        <Style TargetType="Label" x:Key="paramHeader">
+        <Style TargetType="Label" x:Key="styleParamHeader">
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Margin" Value="0,0,20,0" />
         </Style>

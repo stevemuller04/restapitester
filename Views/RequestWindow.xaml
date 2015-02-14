@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RestApiTester;assembly="
-        Title="Show/Create Request" Height="550" Width="700" WindowStartupLocation="CenterOwner" Style="{StaticResource window}">
-    <Grid Style="{StaticResource windowGrid}">
+        Title="Show/Create Request" Height="550" Width="700" WindowStartupLocation="CenterOwner" Style="{StaticResource styleWindow}">
+    <Grid Style="{StaticResource styleWindowGrid}">
         <Grid.Resources>
             <Style TargetType="TextBox">
                 <Style.Triggers>
@@ -29,13 +29,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Style="{StaticResource paramHeader}">HTTP method (verb)</Label>
-        <Label Style="{StaticResource paramHeader}" Grid.Row="1">URL (address)</Label>
-        <Label Style="{StaticResource paramHeader}" Grid.Row="2">Accepted content types</Label>
-        <Label Style="{StaticResource paramHeader}" Grid.Row="3">Authentication: Username</Label>
-        <Label Style="{StaticResource paramHeader}" Grid.Row="4">Authentication: Password</Label>
-        <Label Style="{StaticResource paramHeader}" Grid.Row="5">Parameters</Label>
-        <Label Style="{StaticResource paramHeader}" Grid.Row="6">Additional headers</Label>
+        <Label Style="{StaticResource styleParamHeader}">HTTP method (verb)</Label>
+        <Label Style="{StaticResource styleParamHeader}" Grid.Row="1">URL (address)</Label>
+        <Label Style="{StaticResource styleParamHeader}" Grid.Row="2">Accepted content types</Label>
+        <Label Style="{StaticResource styleParamHeader}" Grid.Row="3">Authentication: Username</Label>
+        <Label Style="{StaticResource styleParamHeader}" Grid.Row="4">Authentication: Password</Label>
+        <Label Style="{StaticResource styleParamHeader}" Grid.Row="5">Parameters</Label>
+        <Label Style="{StaticResource styleParamHeader}" Grid.Row="6">Additional headers</Label>
         <ComboBox Name="fldMethod" Grid.Column="1" SelectedItem="{Binding Method, ValidatesOnDataErrors=True}" ItemsSource="{x:Static local:HttpMethods.Default}" IsEnabled="{Binding IsNew}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

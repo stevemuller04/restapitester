@@ -2,8 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RestApiTester;assembly="
-        Title="ReST API Testing Tool" Height="600" Width="900" Style="{StaticResource window}">
-    <Grid Style="{StaticResource windowGrid}">
+        Title="ReST API Testing Tool" Height="600" Width="900" Style="{StaticResource styleWindow}">
+    <Grid Style="{StaticResource styleWindowGrid}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -13,10 +13,10 @@
         </Grid.RowDefinitions>
         <Button Command="{Binding NewRequestCommand}">New request</Button>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <ItemsControl ItemsSource="{Binding Responses}" Style="{StaticResource responseItemsList}">
+            <ItemsControl ItemsSource="{Binding Responses}" Style="{StaticResource styleResponseItemsList}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Style="{StaticResource responseItem}" x:Name="item">
+                        <Border Style="{StaticResource styleResponseItem}" x:Name="item">
                             <Grid Background="Transparent">
                                 <Grid.Resources>
                                     <Style TargetType="TextBlock">
@@ -49,7 +49,7 @@
                         </Border>
                         <DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                                <Setter Property="Style" TargetName="item" Value="{StaticResource firstResponseItem}"/>
+                                <Setter Property="Style" TargetName="item" Value="{StaticResource styleFirstResponseItem}"/>
                             </DataTrigger>
                         </DataTemplate.Triggers>
                     </DataTemplate>

@@ -34,7 +34,7 @@ namespace RestApiTester
         private RequestViewModel _requestViewModel;
         private bool _isCompleted = false;
         private string _statusCode = "...", _statusString = string.Empty, _statusIcon = string.Empty;
-        private string _contentType = string.Empty, _content = string.Empty, _summary = string.Empty;
+        private string _contentType = string.Empty, _content = string.Empty, _contentLength = "n/a", _summary = string.Empty;
         private List<HttpHeader> _headers = new List<HttpHeader>();
 
         /// <summary>
@@ -162,6 +162,21 @@ namespace RestApiTester
         }
 
         /// <summary>
+        /// Gets the content length of the response in a human-readable format.
+        /// Note that the server might not have specified the related header, in which case this value is not determined.
+        /// </summary>
+        /// <param name="bytes">The number of bytes.</param>
+        public string ContentLengthString
+        {
+            get { return _contentLength; }
+            protected set
+            {
+                _contentLength = value;
+                OnPropertyChanged("ContentLengthString");
+            }
+        }
+
+        /// <summary>
         /// Gets a short summary of the response body.
         /// Includes content-type and content length, if specified.
         /// </summary>
@@ -250,12 +265,14 @@ namespace RestApiTester
             // Make a short summary string of the response body
             if (httpResponse.ContentLength < 0)
             {
+                this.ContentLengthString = "n/a";
                 this.Summary = httpResponse.ContentType;
             }
             else
             {
-                Tuple<double, string> binarySize = GetBinarySize(httpResponse.ContentLength);
-                this.Summary = string.Format("{0}  ({1:0.##} {2})", httpResponse.ContentType, binarySize.Item1, binarySize.Item2);
+                var binarySize = this.GetHumanReableBinarySize(httpResponse.ContentLength);
+                this.ContentLengthString = string.Format("{0:0,000} bytes ({1})", httpResponse.ContentLength, binarySize);
+                this.Summary = string.Format("{0}  ({1})", httpResponse.ContentType, binarySize);
             }
         }
 
@@ -280,10 +297,10 @@ namespace RestApiTester
         }
 
         /// <summary>
-        /// Gets a tuple (value, unit) which represents the given number of bytes in a human-readable format.
+        /// Gets a string which represents the given number of bytes in a human-readable format.
         /// </summary>
         /// <param name="bytes">The number of bytes.</param>
-        private Tuple<double, string> GetBinarySize(long bytes)
+        private string GetHumanReableBinarySize(long bytes)
         {
             double val = bytes;
             Queue<string> units = new Queue<string>(new string[] { "bytes", "KiB", "MiB", "GiB" });
@@ -292,7 +309,7 @@ namespace RestApiTester
                 units.Dequeue();
                 val /= 1024;
             }
-            return new Tuple<double, string>(val, units.Dequeue());
+            return string.Format("{0:0.##} {1}", val, units.Dequeue());
         }
     }
 }

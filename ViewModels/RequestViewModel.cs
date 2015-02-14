@@ -43,7 +43,7 @@ namespace RestApiTester
 
         private RequesterViewModel _requesterViewModel;
         private HttpMethodViewModel _method;
-        private string _url, _accept, _authUsername, _authPassword;
+        private string _url, _accept, _authUsername, _authPassword, _userAgent;
         private ObservableCollection<HttpHeader> _headers;
         private ObservableCollection<HttpParameter> _params;
 
@@ -119,6 +119,19 @@ namespace RestApiTester
             {
                 _authPassword = value;
                 OnPropertyChanged("AuthPassword");
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the user agent string identifying the software accessing the API.
+        /// </summary>
+        public string UserAgent
+        {
+            get { return _userAgent; }
+            set
+            {
+                _userAgent = value;
+                OnPropertyChanged("UserAgent");
             }
         }
 
@@ -232,7 +245,8 @@ namespace RestApiTester
                 Headers = this.Headers.ToList(),
                 Parameters = this.Parameters.ToList(),
                 Method = this.Method.Name,
-                Url = new Uri(this.Url, UriKind.Absolute)
+                Url = new Uri(this.Url, UriKind.Absolute),
+                UserAgent = this.UserAgent
             };
         }
 
@@ -248,6 +262,7 @@ namespace RestApiTester
             this.Accept = request.Accept;
             this.AuthUsername = request.AuthUsername;
             this.AuthPassword = request.AuthPassword;
+            this.UserAgent = request.UserAgent;
             this.Headers = new ObservableCollection<HttpHeader>(request.Headers);
             this.Parameters = new ObservableCollection<HttpParameter>(request.Parameters);
         }

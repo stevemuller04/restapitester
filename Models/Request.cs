@@ -42,6 +42,11 @@ namespace RestApiTester
         public string AuthPassword { get; set; }
 
         /// <summary>
+        /// Gets or sets the user agent string identifying the software accessing the API.
+        /// </summary>
+        public string UserAgent { get; set; }
+
+        /// <summary>
         /// Gets or sets a list of all additional HTTP headers the request specifies.
         /// These do not include protected headers, see <see cref="HttpHeader.ProtectedHttpHeaders"/>.
         /// </summary>
@@ -78,7 +83,7 @@ namespace RestApiTester
             var httpRequest = HttpWebRequest.CreateHttp(urlWithParameters.Uri);
             httpRequest.Method = this.Method;
             httpRequest.Accept = this.Accept;
-            httpRequest.UserAgent = "ReST API Testing Tool";
+            httpRequest.UserAgent = this.UserAgent;
 
             // Add credentials only when a username has been specified
             if (!string.IsNullOrEmpty(this.AuthUsername))

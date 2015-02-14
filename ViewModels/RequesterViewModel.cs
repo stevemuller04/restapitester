@@ -22,7 +22,8 @@ namespace RestApiTester
                 Headers = new List<HttpHeader>(),
                 Parameters = new List<HttpParameter>(),
                 Method = "GET",
-                Url = new Uri("http://localhost")
+                Url = new Uri("http://localhost"),
+                UserAgent = "ReST API Testing Tool"
             };
         }
 

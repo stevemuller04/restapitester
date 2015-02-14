@@ -3,111 +3,114 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RestApiTester;assembly="
         Title="Show/Create Request" Height="630" Width="800" WindowStartupLocation="CenterOwner" Style="{StaticResource styleDialogWindow}">
-    <StackPanel Style="{StaticResource styleWindowStackPanel}">
-        <StackPanel.Resources>
-            <Style TargetType="TextBox">
-                <Style.Triggers>
-                    <Trigger Property="Validation.HasError" Value="true">
-                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        </StackPanel.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Style="{StaticResource styleWindowStackPanel}">
+            <StackPanel.Resources>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="true">
+                            <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <BooleanToVisibilityConverter x:Key="BoolToVis" />
+            </StackPanel.Resources>
 
-        <!-- HTTP request line -->
-        <TextBlock Style="{StaticResource styleParamHeader}">The location of the resource (commonly known as URL) and how it is accessed (HTTP method or verb).</TextBlock>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <local:HttpMethodComboBox SelectedItem="{Binding Method, NotifyOnValidationError=True}" IsEnabled="{Binding IsNew}" Grid.Row="1" />
-            <TextBox Grid.Column="1" Text="{Binding Url, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
-        </Grid>
+            <!-- HTTP request line -->
+            <TextBlock Style="{StaticResource styleParamHeader}">The location of the resource (commonly known as URL) and how it is accessed (HTTP method or verb).</TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <local:HttpMethodComboBox SelectedItem="{Binding Method, NotifyOnValidationError=True}" IsEnabled="{Binding IsNew}" Grid.Row="1" />
+                <TextBox Grid.Column="1" Text="{Binding Url, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
+            </Grid>
 
-        <!-- Accepted content types -->
-        <TextBlock Style="{StaticResource styleParamHeader}">
-            All MIME content types which are supported by the client. The server response must use one of them for the response body.
-            Content types are separated by commas and optionally suffixed by a priority ranging from 0.0 (lowest) to 1.0 (highest), e.g. &quot;text/html;q=0.8&quot;.
-        </TextBlock>
-        <TextBox Text="{Binding Accept, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
+            <!-- Accepted content types -->
+            <TextBlock Style="{StaticResource styleParamHeader}">
+                All MIME content types which are supported by the client. The server response must use one of them for the response body.
+                Content types are separated by commas and optionally suffixed by a priority ranging from 0.0 (lowest) to 1.0 (highest), e.g. &quot;text/html;q=0.8&quot;.
+            </TextBlock>
+            <TextBox Text="{Binding Accept, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
 
-        <!-- User agent -->
-        <TextBlock Style="{StaticResource styleParamHeader}">The user agent string is used to identify the software which accesses the API. Some server display alternative content for specific user agents.</TextBlock>
-        <TextBox Text="{Binding UserAgent, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
+            <!-- User agent -->
+            <TextBlock Style="{StaticResource styleParamHeader}">The user agent string is used to identify the software which accesses the API. Some server display alternative content for specific user agents.</TextBlock>
+            <TextBox Text="{Binding UserAgent, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
 
-        <!-- Details -->
-        <TabControl Margin="0,20,0,0">
-            <!-- Parameters -->
-            <TabItem Header="Parameters">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource styleParamHeader}">
-                        Parameters can be specified either in the query or in the request body.
-                        In the first case, they are appended to the address indicated above using the &quot;?param=value&quot; pattern. In PHP, such parameters are available in the $_GET variable.
-                        In the second case, the request content type is set to &quot;x-www-form-urlencoded&quot; and the parameters are written to the request body. In PHP, they are accessible in the $_POST variable or via php://input.
-                    </TextBlock>
-                    <DataGrid ItemsSource="{Binding Parameters}" IsReadOnly="{Binding IsReadOnly}" MinHeight="150" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Parameter" Binding="{Binding Name, ValidatesOnDataErrors=True}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="DataGridCell.ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnDataErrors=True}" />
-                            <DataGridCheckBoxColumn Header="via body?" Binding="{Binding ViaRequestBody, ValidatesOnDataErrors=True}" ToolTipService.ToolTip="If checked, the parameter will be passed via the request body. Otherwise, it will feature in the query part of the URL." />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </TabItem>
-            <!-- Authentication -->
-            <TabItem Header="Authentication">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource styleParamHeader}">
-                    The user credentials (transmitted in clear text, so consider using HTTPS!) that are used for authentication.
-                    Omitting the user name disables authentication.
-                    </TextBlock>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,0" Text="Username (leave empty to disable auth.)" />
-                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,0" Text="Password (sent in clear text)" />
-                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding AuthUsername, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
-                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding AuthPassword, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
-                    </Grid>
-                </StackPanel>
-            </TabItem>
-            <!-- Additional headers -->
-            <TabItem Header="Additional headers">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource styleParamHeader}">
-                        Additional HTTP headers can be specified here.
-                    </TextBlock>
-                    <DataGrid Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Headers}" IsReadOnly="{Binding IsReadOnly}" MinHeight="150" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="HTTP header" Binding="{Binding Name, ValidatesOnDataErrors=True}">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="DataGridCell.ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnDataErrors=True}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
+            <!-- Details -->
+            <TabControl Margin="0,20,0,0">
+                <!-- Parameters -->
+                <TabItem Header="Parameters">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource styleParamHeader}">
+                            Parameters can be specified either in the query or in the request body.
+                            In the first case, they are appended to the address indicated above using the &quot;?param=value&quot; pattern. In PHP, such parameters are available in the $_GET variable.
+                            In the second case, the request content type is set to &quot;x-www-form-urlencoded&quot; and the parameters are written to the request body. In PHP, they are accessible in the $_POST variable or via php://input.
+                        </TextBlock>
+                        <DataGrid ItemsSource="{Binding Parameters}" IsReadOnly="{Binding IsReadOnly}" MinHeight="150" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Parameter" Binding="{Binding Name, ValidatesOnDataErrors=True}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="DataGridCell.ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnDataErrors=True}" />
+                                <DataGridCheckBoxColumn Header="via body?" Binding="{Binding ViaRequestBody, ValidatesOnDataErrors=True}" ToolTipService.ToolTip="If checked, the parameter will be passed via the request body. Otherwise, it will feature in the query part of the URL." />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <!-- Authentication -->
+                <TabItem Header="Authentication">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource styleParamHeader}">
+                            The user credentials (transmitted in clear text, so consider using HTTPS!) that are used for authentication.
+                            Omitting the user name disables authentication.
+                        </TextBlock>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="10,0" Text="Username (leave empty to disable auth.)" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Margin="10,0" Text="Password (sent in clear text)" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding AuthUsername, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding AuthPassword, ValidatesOnDataErrors=True}" IsReadOnly="{Binding IsReadOnly}" />
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+                <!-- Additional headers -->
+                <TabItem Header="Additional headers">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource styleParamHeader}">
+                            Additional HTTP headers can be specified here. The following headers are protected by the framework and may not be set:
+                            Accept, Connection, Content-Length, Content-Type, Date, Expect, Host, If-Modified-Since, Range, Referer, Transfer-Encoding, User-Agent, Proxy-Connection.
+                        </TextBlock>
+                        <DataGrid Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Headers}" IsReadOnly="{Binding IsReadOnly}" MinHeight="150" CanUserAddRows="True" CanUserDeleteRows="True" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="HTTP header" Binding="{Binding Name, ValidatesOnDataErrors=True}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="DataGridCell.ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Value" Binding="{Binding Value, ValidatesOnDataErrors=True}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
 
-        <!-- "Send" button -->
-        <Button Grid.Column="1" Grid.Row="7" Visibility="{Binding IsNew, Converter={StaticResource BoolToVis}}" Command="{Binding SendCommand}">Send request</Button>
-    </StackPanel>
+            <!-- "Send" button -->
+            <Button Grid.Column="1" Grid.Row="7" Visibility="{Binding IsNew, Converter={StaticResource BoolToVis}}" Command="{Binding SendCommand}">Send request</Button>
+        </StackPanel>
+    </ScrollViewer>
 </Window>

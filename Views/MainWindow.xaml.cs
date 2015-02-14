@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+Copyright © 2015 Steve Muller <steve.muller@outlook.com>
+This file is subject to the license terms in the LICENSE file found in the top-level directory of
+this distribution and at http://github.com/stevemuller04/restapitester/blob/master/LICENSE
+*/
+
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RestApiTester
 {

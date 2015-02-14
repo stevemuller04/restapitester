@@ -1,4 +1,9 @@
-﻿<UserControl x:Class="RestApiTester.HttpMethodLabel"
+﻿<!--
+Copyright © 2015 Steve Muller <steve.muller@outlook.com>
+This file is subject to the license terms in the LICENSE file found in the top-level directory of
+this distribution and at http://github.com/stevemuller04/restapitester/blob/master/LICENSE
+-->
+<UserControl x:Class="RestApiTester.HttpMethodLabel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

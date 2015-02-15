@@ -40,7 +40,7 @@ this distribution and at http://github.com/stevemuller04/restapitester/blob/mast
         </Grid>
 
         <!-- Content type -->
-        <TextBlock Grid.Row="4" Style="{StaticResource styleParamHeader}">The response body is in the following MIME type. The latter must match one of the content types specified in the request.</TextBlock>
+        <TextBlock Grid.Row="4" Style="{StaticResource styleParamHeader}">The response body is in the following MIME type. The latter should match one of the content types specified in the request.</TextBlock>
         <TextBox Grid.Row="5" Text="{Binding ContentType, Mode=OneWay}" IsReadOnly="True" />
 
         <!-- Content -->
